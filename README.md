@@ -10,7 +10,7 @@ On your machine, you should have the following:
 Once have the project cloned, you can run the setup script found in the `scripts` directory
 ```bash
 chmod +x ./scripts/setup-environment.sh
-./scripts/setup-envirnment.sh
+./scripts/setup-environment.sh
 ```
 
 This wil install all the project dependencies, in a dedicated virtual environment created at the root directory of the project (it is called `venv`)
