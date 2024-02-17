@@ -1,4 +1,6 @@
-from typing import List, Dict, Set, Union
+import random
+from re import I
+from typing import List, Dict, Set, Union, Tuple
 from document_parser import DocumentParser
 from spacy import Language
 from spacy.tokens import Token
@@ -70,7 +72,21 @@ class DocumentTagger:
 
         return extracted_token_map
 
-    def fetch_autotags(self) -> Set[str]:
+    def fetch_extra_autotag_suggestions(self, word_tokens: List[Token], total_suggestions: int = 10) -> Set[str]:
+        suggested_word_tokens: Set[str] = set()
+        seen_word_tokens: Set[str] = set()
+
+        while len(suggested_word_tokens) < total_suggestions:
+            random_word_token = random.choice(word_tokens)
+            if random_word_token.text not in seen_word_tokens:
+                suggested_word_tokens.add(random_word_token.text)
+
+            seen_word_tokens.add(random_word_token.text)
+
+        return suggested_word_tokens
+
+
+    def fetch_autotags(self) -> Tuple[Set[str], Set[str]]:
         if self.extracted_token_map is None:
             self.extract_important_tokens() 
 
@@ -96,7 +112,9 @@ class DocumentTagger:
             for word in best_organization_token_matches_for_word_token:
                 organization_autotags.add(word)
 
-        return organization_autotags
+        other_tag_suggestions = self.fetch_extra_autotag_suggestions(list(all_important_word_tokens), total_suggestions=20)
+
+        return organization_autotags, other_tag_suggestions
         
         
         
