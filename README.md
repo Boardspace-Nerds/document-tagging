@@ -19,7 +19,7 @@ This wil install all the project dependencies, in a dedicated virtual environmen
 
 The autotagging demo can be found in the `main.py` script. 
 It takes in three CLI arguments in the following order:
-1. File path for the document PDF (**sample documents can be located inside )
+1. File path for the document PDF (**sample documents can be located inside the documents directory**)
 2. The predefined tags for the mock organization you are tested against, as a comma-seperated list (ex: tag1, tag2,etc)
 3. The Spacy English model name (recommended to use en_core_web_lg, as it was installed in the setup bash script)
 
